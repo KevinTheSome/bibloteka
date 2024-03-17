@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 
-function App() {
+function Navbar() {
 
   return (
     <> 
@@ -9,10 +9,11 @@ function App() {
                 <a href="/" className="text-white font-bold text-lg p-4">Home</a>
                 <a href="/login" className="text-white font-bold text-lg p-4">Login</a>
                 <a href="/register" className="text-white font-bold text-lg p-4">Register</a>
+                <a href="/cart" className="text-white font-bold text-lg p-4">Cart</a>
             </div>
         </nav>
     </>
   )
 }
 
-export default App
+export default Navbar

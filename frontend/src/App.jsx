@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import Navbar from './components/Navbar'
 import Book from './components/Book'
+import Footer from './components/Footer'
 
 function App() {
   const [data, setData] = useState([])
@@ -32,6 +33,7 @@ function App() {
         <Navbar />
         <h1 className='text-3xl font-bold'>Hello, World!</h1>
         {books}
+        <Footer />
       </div>
     </>
   )

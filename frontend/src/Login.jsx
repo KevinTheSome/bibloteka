@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function Login() {
   const [data, setData] = useState([])
@@ -25,6 +26,18 @@ function Login() {
       <div className="App">
         <Navbar />
         <h1 className='text-3xl font-bold'>Hello From the Login</h1>
+        <form>
+          <label>
+            <input type="text" name="username" id="" />
+            Username:
+          </label>
+          <label>
+            <input type="password" name="password" id="" />
+            Password:
+          </label>
+            <input type="button" value="Login" />
+        </form>
+        <Footer />
       </div>
     </>
   )

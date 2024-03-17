@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function Register() {
   const [data, setData] = useState([])
@@ -26,6 +27,19 @@ function Register() {
       <div className="App">
         <Navbar />
         <h1 className='text-3xl font-bold'>Hello from the regester</h1>
+        <form>
+          <label>
+            <input type="text" name="username" id="" />
+            Username:
+          </label>
+          <label>
+            <input type="password" name="password" id="" />
+            Password:
+          </label>
+            <input type="button" value="Login" />
+        </form>
+
+        <Footer />
       </div>
     </>
   )
