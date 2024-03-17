@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Login from "./Login";
 import Register from "./Register";
+import Cart from "./Cart";
+
 const Rauter = createBrowserRouter(
     [
         {
@@ -15,6 +17,10 @@ const Rauter = createBrowserRouter(
         {
             path: "/register",
             element: <Register />
+        },
+        {
+            path: "/cart",
+            element: <Cart />
         },
     ]
 );
