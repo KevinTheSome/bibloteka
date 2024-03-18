@@ -1,44 +1,49 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 function Register() {
-  const [data, setData] = useState([])
+  const [username , setUsername] = useState("")
+  const [password , setPassword] = useState("")
+  const navigate = useNavigate();
 
-  async function feachbackend(){
+  async function createAccount(){
     try {
-      axios.get("http://localhost:8888/login")
-      .then(function (response){
-        setData(response.data);
-      })  
+      axios.post("http://localhost:8888/register", {
+        username: username, password: password,
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          return navigate("/login");
+        }
+        return null;
+      })
     } catch (error) {
       console.error(error)
     }
+
   }
 
-  useEffect(() => {
-    feachbackend()
-  },[])
-
-  console.log(data);
   return (
     <>
       <div className="App">
         <Navbar />
-        <h1 className='text-3xl font-bold'>Hello from the regester</h1>
-        <form>
-          <label>
-            <input type="text" name="username" id="" />
-            Username:
-          </label>
-          <label>
-            <input type="password" name="password" id="" />
-            Password:
-          </label>
-            <input type="button" value="Login" />
-        </form>
-
+        <div className='grid justify-center content-center'>
+          <h1 className='text-3xl font-bold'>Register</h1>
+          <form className='grid border-4 border-black-800 '>
+            <label>
+              Username:
+              <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </label>
+            <label>
+              Password:
+              <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </label>
+              <input type="button" value="Register" onClick={createAccount} />
+          </form>
+        </div>
         <Footer />
       </div>
     </>

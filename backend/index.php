@@ -20,7 +20,7 @@ switch ($route) {
         require "./Controllers/user.controllers.php";
         break;
     case '/register':
-        require "./Controllers/user.controllers.php";
+        require "./Controllers/register.controllers.php";
         break;
     case '/cart':
         require "./Controllers/cart.controllers.php";

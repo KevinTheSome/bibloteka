@@ -12,7 +12,7 @@ class loginModel{
         $this->db = new DbConnect($config);
     }
 
-    public function loginUser($username , $password)
+    public function loginUser(string $username ,string $password)
     {
         $quary = $this->db->dbconn->prepare("SELECT * FROM users WHERE username = :username");
         $quary->execute([[':username' => $username]]);

@@ -19,15 +19,21 @@ class userModel{
         return $quary->fetchAll();
     }
 
-    public function addUser($username,$userpassword,$isadmin){
-        $quary = $this->db->dbconn->prepare("INSERT INTO users(username,userpassword,isadmin) VALUES(':username',':userpassword',:isadmin)");
-        $quary->execute([[':username' => $username , ':userpassword' => password_hash($userpassword,PASSWORD_DEFAULT) , ':isadmin' => $isadmin]]);
+    public function addUser(string $username,string $userpassword,int $isadmin){
+        $quary = $this->db->dbconn->prepare("INSERT INTO users(username,userpassword,isadmin) VALUES(:username,:userpassword,:isadmin)");
+        $quary->execute([':username' => $username , ':userpassword' => password_hash($userpassword,PASSWORD_DEFAULT) , ':isadmin' => $isadmin]);
+        return $quary->fetchAll();
+    }
+
+    public function setAdmin(string $username){
+        $quary = $this->db->dbconn->prepare("UPDATE users SET isadmin = 1 WHERE username = :username");
+        $quary->execute([':username' => $username]);
         return $quary->fetchAll();
     }
 
     public function deleteUser($id){  //maybe will be unesued
         $quary = $this->db->dbconn->prepare("DELETE FROM users WHERE id = :id");
-        $quary->execute([[':id' => $id]]);
+        $quary->execute([':id' => $id]);
         return $quary->fetchAll();
     }
 }

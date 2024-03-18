@@ -14,14 +14,14 @@ class bookModel{
 
     public function getBooks()
     {
-        $quary = $this->db->dbconn->prepare("SELECT * FROM books");
+        $quary = $this->db->dbconn->prepare("SELECT * FROM books JOIN author ON books.author_id = author.id");
         $quary->execute();
         return $quary->fetchAll();
     }
 
-    public function addBook($title , $author_id , $releaseYear , $available){
-        $quary = $this->db->dbconn->prepare("INSERT INTO books(title,author_id,releaseYear,available) VALUES(':title', :author_id , :releaseYear, :available)");
-        $quary->execute([[':title' => $title , ':author_id' => $author_id , ':releaseYear' => $releaseYear , ':available' => $available]]);
+    public function addBook(string $title ,int $author_id ,int $releaseYear ,int $available){
+        $quary = $this->db->dbconn->prepare("INSERT INTO books(title,author_id,releaseYear,available) VALUES(:title, :author_id , :releaseYear, :available)");
+        $quary->execute([':title' => $title , ':author_id' => $author_id , ':releaseYear' => $releaseYear , ':available' => $available]);
         return $quary->fetchAll();
     }
 }
