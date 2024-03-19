@@ -35,11 +35,11 @@ function Register() {
           <form className='grid border-4 border-black-800 '>
             <label>
               Username:
-              <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input required type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
             <label>
               Password:
-              <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
               <input type="button" value="Register" onClick={createAccount} />
           </form>

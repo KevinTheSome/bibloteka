@@ -15,7 +15,7 @@ class loginModel{
     public function loginUser(string $username ,string $password)
     {
         $quary = $this->db->dbconn->prepare("SELECT * FROM users WHERE username = :username");
-        $quary->execute([[':username' => $username]]);
+        $quary->execute([':username' => $username]);
         $user = $quary->fetch();
         if($user && password_verify($password , $user['userpassword'])){
             return $user;

@@ -1,29 +1,28 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 function Login() {
-  const [data, setData] = useState([])
   const [username , setUsername] = useState("")
   const [password , setPassword] = useState("")
+  const navigate = useNavigate();
 
-  async function feachbackend(){
+  async function loginAccount(){
     try {
-      axios.get("http://localhost:8888/login")
-      .then(function (response){
-        setData(response.data);
-      })  
+      axios.post("http://localhost:8888/login", {
+        username: username, password: password,
+      })
+      .then(function (response) {
+        navigate("/")
+      })
     } catch (error) {
       console.error(error)
     }
+
   }
 
-  useEffect(() => {
-    feachbackend()
-  },[])
-
-  console.log(data);
   return (
     <>
       <div className="App">
@@ -33,13 +32,13 @@ function Login() {
           <form className='grid border-4 border-black-800 '>
             <label>
               Username:
-              <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input required type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
             <label>
               Password:
-              <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-              <input type="button" value="Login" />
+              <input type="button" value="Login" onClick={loginAccount}/>
           </form>
         </div>
         <Footer />
