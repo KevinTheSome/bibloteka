@@ -4,7 +4,7 @@ function Navbar() {
 
   return (
     <> 
-        <nav className="bg-gray-800 p-4">
+        <nav className="bg-gray-800 p-4 ">
             <div className="container mx-auto">
                 <a href="/" className="text-white font-bold text-lg p-4">Home</a>
                 <a href="/login" className="text-white font-bold text-lg p-4">Login</a>

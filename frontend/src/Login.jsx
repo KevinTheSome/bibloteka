@@ -9,15 +9,26 @@ function Login() {
   const [password , setPassword] = useState("")
   const navigate = useNavigate();
 
+  async function check(){
+    if (username == "" && password == ""){
+      console.log("Emtpy filds not allowed") //todo
+    }else{
+      await loginAccount()
+    }
+  }
   async function loginAccount(){
     try {
       axios.post("http://localhost:8888/login", {
         username: username, password: password,
+      },{
+        withCredentials: true,
       })
       .then(function (response) {
+        console.log(response)
+        console.log(response.data)
         navigate("/")
       })
-    } catch (error) {
+    } catch (error) { 
       console.error(error)
     }
 
@@ -38,7 +49,7 @@ function Login() {
               Password:
               <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-              <input type="button" value="Login" onClick={loginAccount}/>
+              <input type="button" value="Login" onClick={check}/>
           </form>
         </div>
         <Footer />

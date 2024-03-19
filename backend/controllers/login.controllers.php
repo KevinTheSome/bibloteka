@@ -1,6 +1,8 @@
 <?php
 session_set_cookie_params(86400); //set session to expire in 24 hours
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+ }
 
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header('Access-Control-Allow-Credentials: true');
