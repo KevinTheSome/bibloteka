@@ -22,6 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             $_SESSION["user"] = $user;
             echo json_encode(["user" => $_SESSION["user"]]);
     }else{
-        json_encode(["error" => "Invalid username or password"]);
+        echo json_encode(["error" => "Invalid username or password"]);
     }
 }

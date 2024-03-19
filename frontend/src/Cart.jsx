@@ -1,11 +1,29 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Book from './components/Book'
 import Footer from './components/Footer'
 
 function Cart() {
   const [data, setData] = useState([])
+  const navigate = useNavigate();
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return false;
+  }
 
   async function feachbackend(){
     try {
@@ -21,18 +39,15 @@ function Cart() {
   useEffect(() => {
     feachbackend()
   },[])
-  console.log(data);
-
-  const books = data.map((value, key) => {
-    return <Book key={key} book={value}/>;
-  })
 
   return (
     <>
       <div className="App">
         <Navbar />
-        <h1 className='text-3xl font-bold'>Hello, from cart</h1>
-        {books}
+        {getCookie("PHPSESSID") != false
+        ? <p>Hello you are loged in</p>
+        : navigate("/login")
+        }
         <Footer />
       </div>
     </>
