@@ -3,6 +3,7 @@ import App from "./App";
 import Login from "./Login";
 import Register from "./Register";
 import Cart from "./Cart";
+import Admin from "./Admin";
 
 const Rauter = createBrowserRouter(
     [
@@ -21,6 +22,10 @@ const Rauter = createBrowserRouter(
         {
             path: "/cart",
             element: <Cart />
+        },
+        {
+            path: "/admin",
+            element: <Admin />
         },
     ]
 );

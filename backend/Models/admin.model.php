@@ -2,7 +2,7 @@
 
 require_once "./DbConnect.class.php";
 
-class bookModel{
+class adminModel{
     private $db;
     private $config;
 

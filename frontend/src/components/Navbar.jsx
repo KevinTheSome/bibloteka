@@ -10,6 +10,7 @@ function Navbar() {
                 <a href="/login" className="text-white font-bold text-lg p-4">Login</a>
                 <a href="/register" className="text-white font-bold text-lg p-4">Register</a>
                 <a href="/cart" className="text-white font-bold text-lg p-4">Cart</a>
+                <a href="/admin" className="text-white font-bold text-lg p-4">Admin</a>
             </div>
         </nav>
     </>
