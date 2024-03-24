@@ -25,4 +25,11 @@ class cartModel{
         $quary->execute([':user_id'=> $user_id , ':book_id' => $book_id , ':amount' => $amount , ':return_date' => $return_date]);
         return $quary->fetchAll();
     }
+
+    public function updateDateCartEntry(string $return_date ,int $id)
+    {
+        $quary = $this->db->dbconn->prepare("UPDATE cart SET return_date = :return_date WHERE id = :id");
+        $quary->execute([':return_date' => $return_date,':id' => $id]);
+        return $quary->fetchAll();
+    }
 }

@@ -4,36 +4,32 @@ import Navbar from './components/Navbar'
 import Book from './components/Book'
 import Footer from './components/Footer'
 
-function App() {
-  const [data, setData] = useState([])
-  const [books, setBooks] = useState([])
-  const [user, setUser] = useState([])
-
+function UserControl() {
+  const [books, setbooks] = useState([])
+  const [user, setuser] = useState([])
   axios.defaults.withCredentials = true;
 
-  useEffect(() => {
+  async function feachbackend(){
     try {
       axios.get("http://localhost:8888/")
       .then(function (response){
-        setData(response.data);
-        setBooks(response.data.books);
-        setUser(response.data.user);
+        setbooks(response.data["books"]);
+        setuser(response.data["user"]);
       })  
     } catch (error) {
       console.error(error)
     }
-  },[])
+  }
 
-  const booksJSX = books.map((value, key) => {
-    return <Book key={key} book={value} user={user}/>;
-  })
+  useEffect(() => {
+    feachbackend()
+  },[])
 
   return (
     <>
       <div className="App">
         <Navbar />
         <div className='grid '>
-          {booksJSX}
         </div>
         <Footer />
       </div>
@@ -41,4 +37,4 @@ function App() {
   )
 }
 
-export default App
+export default UserControl

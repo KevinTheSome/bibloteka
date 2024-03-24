@@ -24,4 +24,10 @@ class bookModel{
         $quary->execute([':title' => $title , ':author_id' => $author_id , ':releaseYear' => $releaseYear , ':available' => $available]);
         return $quary->fetchAll();
     }
+
+    public function updateAvailableBook(int $available , int $id){
+        $quary = $this->db->dbconn->prepare("UPDATE books SET available = :available WHERE id = :id");
+        $quary->execute([':return_date' => $available,':id' => $id]);
+        return $quary->fetchAll();
+    }
 }

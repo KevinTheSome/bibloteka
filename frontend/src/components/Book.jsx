@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 function Book(props) {
+  const [bookAvelabel, setBookAvelabel] = useState(props.book.available)
   const navigate = useNavigate();
 
   function getCookie(cname) {
@@ -21,9 +22,36 @@ function Book(props) {
     return "";
   }
 
+  function gettoday(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = `0${date.getMonth() + 1}`.slice(-2);
+    const day = `0${date.getDate()}`.slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
   function rentBook(){
-    if(getCookie("PHPSESSID") != "" && props.book.available == 1){
-      console.log("You got the book") //todo
+    if(getCookie("PHPSESSID") != "" && props.book.available > 0){
+      try {
+        axios.post("http://localhost:8888/", {
+          user_id: props.user.id,
+          book_id: props.book.id,
+          amount: 1,
+          return_date: gettoday(),
+          available: bookAvelabel-1,
+          book_id: props.book.id
+        })
+        .then(function (response) {
+          if (response.status === 200) {
+            return navigate("/");
+          }
+          return null;
+        })
+        setBookAvelabel(bookAvelabel-1)
+      } catch (error) {
+        console.error(error)
+      }
+
     }else{
       navigate("/login")
     }
@@ -35,7 +63,7 @@ function Book(props) {
             <p>Title: {props.book.title}</p>
             <p>Author: {props.book.author}</p>
             <p>Releasd: {props.book.releaseYear}</p>
-            <p>Available:{props.book.available}</p>
+            <p>Available:{bookAvelabel}</p>
             <button onClick={rentBook} className='bg-slate-500 text-white'>Rent</button>
         </div>
     </> 
