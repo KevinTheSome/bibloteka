@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  const [user, setUser] = useState({})
   const [data, setData] = useState([])
   const [title, setTitle] = useState("Title")
   const [author, setAuthor] = useState(1)
@@ -36,10 +37,6 @@ function Admin() {
       }
     }
     return "";
-  }
-
-  if(getCookie("PHPSESSID") == ""){
-    navigate("/login")
   }
 
   async function addBook() {
@@ -136,13 +133,20 @@ function Admin() {
       .then(function (response){
         setAuthors(response.data.authors)
         setBooks(response.data.books)
+        setUser(response.data.user)
         navigate("/admin")
       })
     } catch (error) {
       console.error(error)
     }
+
+    if(getCookie("PHPSESSID") == "" || user.isadmin === 0) {
+      navigate("/")
+    }
+    
   },[])
-  console.log(books)
+
+
 
   return (
     <>

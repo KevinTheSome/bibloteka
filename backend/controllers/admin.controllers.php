@@ -73,5 +73,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 
 }else{
-    echo json_encode(["authors"=>$adminModel->getAuthors(),"books"=>$adminModel->getBooks()]);
+    echo json_encode(["user"=>$_SESSION["user"],"authors"=>$adminModel->getAuthors(),"books"=>$adminModel->getBooks()]);
 }
