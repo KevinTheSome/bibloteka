@@ -34,18 +34,19 @@ function Admin() {
   }
 
   async function addBook() {
+    console.log("title: " + title)
+    console.log("author_id: " + author)
+    console.log("released: " + release)
+    console.log("available: " + available)
     try {
-      axios.post("http://localhost:8888/admin", {
+      axios.post("http://localhost:8888/admin/addbook", {
         title: title,
         author_id: author,
-        released: release,
+        releaseYear: release,
         available: available
       })
       .then(function (response) {
-        if (response.status === 200) {
-          return navigate("/");
-        }
-        return null;
+        console.log(response.data)
       })
     } catch (error) {
       console.error(error)
@@ -54,14 +55,11 @@ function Admin() {
 
   async function addAuthor() {
     try {
-      axios.post("http://localhost:8888/admin", {
-        Author: newauthor,
+      axios.post("http://localhost:8888/admin/addauthor", {
+        author: newauthor,
       })
       .then(function (response) {
-        if (response.status === 200) {
-          return navigate("/");
-        }
-        return null;
+        console.log(response.data)
       })
     } catch (error) {
       console.error(error)
@@ -77,7 +75,6 @@ function Admin() {
       console.error(error)
     }
   },[])
-  console.log(authors)
 
   return (
     <>
@@ -92,7 +89,7 @@ function Admin() {
             </label>
             <label>
               Author id:
-              <select>
+              <select value={author} onChange={(e) => setAuthor(e.target.value)}>
                 {authors.map((author) => <option key={author.id} value={author.id} >{author.author}</option>)}
               </select>
             </label>
@@ -104,7 +101,7 @@ function Admin() {
               Available:
               <input type="number" className="w-1/12 border-2 border-gray-700" placeholder="Available" value={available} onChange={(e) => setAvailable(e.target.value)}/>
             </label>
-            <button onClick={addBook} >Add Book</button>
+            <input type="button" value="Add Book" onClick={addBook}/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -112,7 +109,7 @@ function Admin() {
               Author:
               <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Title" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
             </label>
-            <button onClick={addAuthor} >Add Author</button>
+            <input type="button" value="Add Author" onClick={addAuthor}/>
           </form>
 
         </div>

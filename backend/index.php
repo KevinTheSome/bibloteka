@@ -26,8 +26,14 @@ switch ($route) {
         require "./Controllers/cart.controllers.php";
         break;
     case '/admin':
-            require "./Controllers/admin.controllers.php";
-            break;
+        require "./Controllers/admin.controllers.php";
+        break;
+    case '/admin/addbook':
+        require "./Controllers/admin.controllers.php";
+        break;
+    case '/admin/addauthor':
+        require "./Controllers/admin.controllers.php";
+        break;
         
     default:
         http_response_code(404);

@@ -2,7 +2,6 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar'
-import Book from './components/Book'
 import Footer from './components/Footer'
 
 function Cart() {
@@ -27,9 +26,10 @@ function Cart() {
 
   async function feachbackend(){
     try {
-      axios.get("http://localhost:8888/")
+      axios.get("http://localhost:8888/cart")
       .then(function (response){
         setData(response.data);
+        console.log(response.data)
       })  
     } catch (error) {
       console.error(error)

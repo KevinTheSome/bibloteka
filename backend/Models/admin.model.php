@@ -12,14 +12,15 @@ class adminModel{
         $this->db = new DbConnect($config);
     }
 
-    public function addAuthor($author)
+    public function addAuthor(string $author)
     {
-        $quary = $this->db->dbconn->prepare("INSERT INTO author(author) VALUES(':author')");
-        $quary->execute([[':author' => $author]]);
+        $quary = $this->db->dbconn->prepare("INSERT INTO author(author) VALUES(:author)");
+        $quary->execute([':author' => $author]);
         return $quary->fetchAll();
     }
 
-    public function addBook($title , $author_id , $releaseYear , $available){
+    public function addBook(string $title ,int $author_id ,int $releaseYear ,int $available)
+    {
         $quary = $this->db->dbconn->prepare("INSERT INTO books(title,author_id,releaseYear,available) VALUES(:title, :author_id , :releaseYear, :available)");
         $quary->execute([':title' => $title , ':author_id' => $author_id , ':releaseYear' => $releaseYear , ':available' => $available]);
         return $quary->fetchAll();
