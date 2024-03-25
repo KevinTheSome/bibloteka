@@ -40,10 +40,19 @@ switch ($route) {
     case '/admin/addbook':
         require "./Controllers/admin.controllers.php";
         break;
+    case '/admin/removebook':
+        require "./Controllers/admin.controllers.php";
+        break;
     case '/admin/addauthor':
         require "./Controllers/admin.controllers.php";
         break;
+    case '/admin/removeauthor':
+        require "./Controllers/admin.controllers.php";
+        break;
     case '/admin/addadmin':
+        require "./Controllers/admin.controllers.php";
+        break;
+    case '/admin/removeadmin':
         require "./Controllers/admin.controllers.php";
         break;
         

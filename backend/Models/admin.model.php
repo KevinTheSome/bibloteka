@@ -39,21 +39,27 @@ class adminModel{
         return $quary->fetchAll();
     }
 
-    public function delAuthor($id)
+    public function removeAuther(int $id) 
     {
         $quary = $this->db->dbconn->prepare("DELETE FROM author WHERE id = :id");
         $quary->execute([':id' => $id]);
         return $quary->fetchAll();
     }
 
-    public function delBook($id){
-        $quary = $this->db->dbconn->prepare("DELETE FROM book WHERE id = :id");
+    public function removeBook(int $id){
+        $quary = $this->db->dbconn->prepare("DELETE FROM books WHERE id = :id");
         $quary->execute([':id' => $id]);
         return $quary->fetchAll();
     }
 
     public function getAuthors(){
         $quary = $this->db->dbconn->prepare("SELECT * FROM author");
+        $quary->execute();
+        return $quary->fetchAll();
+    }
+
+    public function getBooks(){
+        $quary = $this->db->dbconn->prepare("SELECT * FROM books");
         $quary->execute();
         return $quary->fetchAll();
     }

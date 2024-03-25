@@ -11,8 +11,13 @@ function Admin() {
   const [author, setAuthor] = useState(1)
   const [release, setRelease] = useState(2024)
   const [available, setAvailable] = useState(1)
-  const [newauthor, setnewAuthor] = useState("Author")
+  const [newauthor, setnewAuthor] = useState("")
   const [authors, setAuthors] = useState([]) //Authors form the backend
+  const [book_id, setBook_id] = useState(0)
+  const [books, setBooks] = useState([]) //Books form the backend
+  const [author_id , setAuthor_id] = useState(0)
+  const [addAdminUsername , setAddAdminUsername] = useState("")
+  const [removeAdminUsername , setRemoveAdminUsername] = useState("")
 
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
@@ -38,10 +43,6 @@ function Admin() {
   }
 
   async function addBook() {
-    console.log("title: " + title)
-    console.log("author_id: " + author)
-    console.log("released: " + release)
-    console.log("available: " + available)
     try {
       axios.post("http://localhost:8888/admin/addbook", {
         title: title,
@@ -51,6 +52,22 @@ function Admin() {
       })
       .then(function (response) {
         console.log(response.data)
+        navigate("/admin")
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function removeBook() {
+    console.log(book_id)
+    try {
+      axios.post("http://localhost:8888/admin/removebook", {
+        book_id: book_id,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        navigate("/admin")
       })
     } catch (error) {
       console.error(error)
@@ -64,6 +81,21 @@ function Admin() {
       })
       .then(function (response) {
         console.log(response.data)
+        navigate("/admin")
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function removeAuthor() {
+    try {
+      axios.post("http://localhost:8888/admin/removeauthor", {
+        author_id: author_id,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        navigate("/admin")
       })
     } catch (error) {
       console.error(error)
@@ -73,10 +105,25 @@ function Admin() {
   async function addAdmin() {
     try {
       axios.post("http://localhost:8888/admin/addadmin", {
-        author: newauthor,
+        username: addAdminUsername,
       })
       .then(function (response) {
         console.log(response.data)
+        navigate("/admin")
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function removeAdmin() {
+    try {
+      axios.post("http://localhost:8888/admin/removeadmin", {
+        username: removeAdminUsername,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        navigate("/admin")
       })
     } catch (error) {
       console.error(error)
@@ -87,12 +134,15 @@ function Admin() {
     try {
       axios.get("http://localhost:8888/admin")
       .then(function (response){
-        setAuthors(response.data)
+        setAuthors(response.data.authors)
+        setBooks(response.data.books)
+        navigate("/admin")
       })
     } catch (error) {
       console.error(error)
     }
   },[])
+  console.log(books)
 
   return (
     <>
@@ -124,18 +174,46 @@ function Admin() {
 
           <form className='grid border-4 border-black-800'>
             <label>
+              Book id:
+                <select value={book_id} onChange={(e) => setBook_id(e.target.value)}>
+                  {books.map((book) => <option key={book.id + .1} value={book.id} >{book.title}</option>)}
+               </select>
+              </label>
+            <input type="button" value="Remove Book" onClick={removeBook}/>
+          </form>
+
+          <form className='grid border-4 border-black-800'>
+            <label>
               Author:
-              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Title" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
+              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Author" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
             </label>
             <input type="button" value="Add Author" onClick={addAuthor}/>
           </form>
 
           <form className='grid border-4 border-black-800'>
             <label>
-              Author:
-              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Title" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
+              Author id:
+                <select value={author_id} onChange={(e) => setAuthor_id(e.target.value)}>
+                  {authors.map((author) => <option key={author.id} value={author.id} >{author.author}</option>)}
+                </select>
+              </label>
+            <input type="button" value="Remove Author" onClick={removeAuthor}/>
+          </form>
+
+          <form className='grid border-4 border-black-800'>
+            <label>
+              Username:
+              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Username" value={addAdminUsername} onChange={(e) => setAddAdminUsername(e.target.value)}/>
             </label>
             <input type="button" value="Add Admin" onClick={addAdmin}/>
+          </form>
+
+          <form className='grid border-4 border-black-800'>
+            <label>
+              Username:
+              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Username" value={removeAdminUsername} onChange={(e) => setRemoveAdminUsername(e.target.value)}/>
+            </label>
+            <input type="button" value="Remove Admin" onClick={removeAdmin}/>
           </form>
 
         </div>

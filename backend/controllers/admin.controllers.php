@@ -22,6 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
     }
 
+    if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/admin/removebook")
+    {
+        if(isset($data["book_id"]))
+        {
+            $adminModel->removeBook($data["book_id"]);
+        }else{
+            echo "Error Not evrything is set";
+        }
+    }
+
     if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/admin/addauthor")
     {
         if(isset($data["author"]))
@@ -31,6 +41,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             echo "Error Not evrything is set";
         }
     }
+
+    if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/admin/removeauthor")
+    {
+        if(isset($data["author_id"]))
+        {
+            $adminModel->removeAuther($data["author_id"]);
+        }else{
+            echo "Error Not evrything is set";
+        }
+    }
+
+    if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/admin/addadmin")
+    {
+        if(isset($data["username"]))
+        {
+            $adminModel->addAdmin($data["username"]);
+        }else{
+            echo "Error Not evrything is set";
+        }
+    }
+
+    if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/admin/removeadmin")
+    {
+        if(isset($data["username"]))
+        {
+            $adminModel->removeAdmin($data["username"]);
+        }else{
+            echo "Error Not evrything is set";
+        }
+    }
+
 }else{
-    echo json_encode($adminModel->getAuthors());
+    echo json_encode(["authors"=>$adminModel->getAuthors(),"books"=>$adminModel->getBooks()]);
 }
