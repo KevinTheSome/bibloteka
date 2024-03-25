@@ -25,6 +25,12 @@ switch ($route) {
     case '/cart':
         require "./Controllers/cart.controllers.php";
         break;
+    case '/cart/update':
+        require "./Controllers/cart.controllers.php";
+        break;
+    case '/cart/remove':
+        require "./Controllers/cart.controllers.php";
+        break;
     case '/admin':
         require "./Controllers/admin.controllers.php";
         break;

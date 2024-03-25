@@ -3,10 +3,13 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import OneCart from './components/OneCart';
 
 function Cart() {
-  const [data, setData] = useState([])
+  const [cart, setCart] = useState([])
+  const [user, setUser] = useState({})
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   function getCookie(cname) {
     let name = cname + "=";
@@ -21,33 +24,38 @@ function Cart() {
         return c.substring(name.length, c.length);
       }
     }
-    return false;
+    return "";
   }
 
-  async function feachbackend(){
+  if(getCookie("PHPSESSID") == ""){
+    navigate("/login")
+  }
+
+  useEffect(() => {
     try {
       axios.get("http://localhost:8888/cart")
       .then(function (response){
-        setData(response.data);
-        console.log(response.data)
+        setCart(response.data.cart)
+        setUser(response.data.user)
       })  
     } catch (error) {
       console.error(error)
     }
-  }
-
-  useEffect(() => {
-    feachbackend()
   },[])
+
+  console.log(cart)
+
+  const CartJSX = cart.map((value, key) => {
+    return <OneCart key={key} cart={value} user={user}/>;
+  })
 
   return (
     <>
       <div className="App">
         <Navbar />
-        {getCookie("PHPSESSID") != false
-        ? <p>Hello you are loged in</p>
-        : navigate("/login")
-        }
+        <div className='grid'>
+        {CartJSX}
+        </div>
         <Footer />
       </div>
     </>

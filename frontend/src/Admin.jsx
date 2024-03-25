@@ -33,6 +33,10 @@ function Admin() {
     return "";
   }
 
+  if(getCookie("PHPSESSID") == ""){
+    navigate("/login")
+  }
+
   async function addBook() {
     console.log("title: " + title)
     console.log("author_id: " + author)

@@ -12,9 +12,9 @@ class cartModel{
         $this->db = new DbConnect($config);
     }
 
-    public function userCart(string $user_id)
+    public function userCart(int $user_id)
     {
-        $quary = $this->db->dbconn->prepare("SELECT * FROM cart WHERE user_id = :user_id");
+        $quary = $this->db->dbconn->prepare("SELECT * FROM cart JOIN books ON cart.book_id = books.id WHERE user_id = :user_id");
         $quary->execute([':user_id'=> $user_id]);
         return $quary->fetchAll();
     }
@@ -30,6 +30,13 @@ class cartModel{
     {
         $quary = $this->db->dbconn->prepare("UPDATE cart SET return_date = :return_date WHERE id = :id");
         $quary->execute([':return_date' => $return_date,':id' => $id]);
+        return $quary->fetchAll();
+    }
+
+    public function deleteCartEntry(int $id)
+    {
+        $quary = $this->db->dbconn->prepare("DELETE FROM cart WHERE id = :id");
+        $quary->execute([':id' => $id]);
         return $quary->fetchAll();
     }
 }

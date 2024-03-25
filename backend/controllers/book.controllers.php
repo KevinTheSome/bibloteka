@@ -2,7 +2,7 @@
 require_once "./session.php";
 $config = require "./config.php";
 require_once "./Models/book.model.php";
-require_once "./Models/cart.models.php";
+require_once "./Models/cart.model.php";
 require_once "./util.php";
 
 $bookModel = new bookModel($config);
