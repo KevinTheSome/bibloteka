@@ -16,11 +16,11 @@ switch ($route) {
     case '/books':
         require "./Controllers/book.controllers.php";
         break;
-    case '/login':
-        require "./Controllers/login.controllers.php";
-        break;
     case '/register':
         require "./Controllers/register.controllers.php";
+        break;
+    case '/login':
+        require "./Controllers/login.controllers.php";
         break;
     case '/cart':
         require "./Controllers/cart.controllers.php";

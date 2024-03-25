@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 }else{
     if(isset($_SESSION["user"])){
-        echo json_encode(["user"=>$_SESSION["user"],"cart"=>$cartModel->userCart($_SESSION["user"]["id"])]);
+        echo json_encode(["user" => $_SESSION["user"],"cart" => $cartModel->userCart($_SESSION["user"]["id"])]);
     }else{
         echo "you are not loged in yet";
     }

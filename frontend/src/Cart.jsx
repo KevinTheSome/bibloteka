@@ -37,13 +37,13 @@ function Cart() {
       .then(function (response){
         setCart(response.data.cart)
         setUser(response.data.user)
+        console.log(response.data)
       })  
     } catch (error) {
       console.error(error)
     }
   },[])
 
-  console.log(cart)
 
   const CartJSX = cart.map((value, key) => {
     return <OneCart key={key} cart={value} user={user}/>;

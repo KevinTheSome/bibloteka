@@ -19,6 +19,7 @@ function OneCart(props) {
   }
 
   async function returnBook(){
+    console.log("id: "  + props.cart.id)
     try {
       axios.post("http://localhost:8888/cart/remove", {
         id: props.cart.id
@@ -37,6 +38,7 @@ function OneCart(props) {
             <p>Title: {props.cart.title}</p>
             <p>Released Year: {props.cart.releaseYear}</p>
             <p>Return date: {props.cart.return_date}</p>
+            <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} />
             <input type="button" value="Extend rent" onClick={extendRent} className='cursor-pointer bg-blue-500 text-white' />
             <input type="button" value="Return" onClick={returnBook} className='cursor-pointer bg-blue-700 text-white' />
         </div>

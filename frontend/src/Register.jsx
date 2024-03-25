@@ -8,6 +8,7 @@ function Register() {
   const [username , setUsername] = useState("")
   const [password , setPassword] = useState("")
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   async function createAccount(){
     try {
