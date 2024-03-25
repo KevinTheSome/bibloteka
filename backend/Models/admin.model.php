@@ -37,4 +37,10 @@ class adminModel{
         $quary->execute([':id' => $id]);
         return $quary->fetchAll();
     }
+
+    public function getAuthors(){
+        $quary = $this->db->dbconn->prepare("SELECT * FROM author");
+        $quary->execute();
+        return $quary->fetchAll();
+    }
 }
