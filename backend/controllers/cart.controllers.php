@@ -2,6 +2,7 @@
 require_once "./session.php";
 $config = require "./config.php";
 require_once "./Models/cart.model.php";
+require_once "./Models/book.model.php";
 require_once "./util.php";
 
 $cartModel = new cartModel($config);
@@ -20,8 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/cart/remove")
     {
-        if(isset($data["id"])){
+        if(isset($data["id"]) && isset($data["book_id"]) && isset($data["available"])){
+            $bookModel = new bookModel($config);
             $cartModel->deleteCartEntry($data["id"]);
+            $bookModel->updateAvailableBook($data["available"] +1,$data["book_id"]);
         }else{
             echo "Error Not evrything is set";
         }

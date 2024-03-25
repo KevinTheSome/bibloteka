@@ -14,7 +14,7 @@ class cartModel{
 
     public function userCart(int $user_id)
     {
-        $quary = $this->db->dbconn->prepare("SELECT cart.id, cart.user_id, cart.book_id, cart.amount, cart.return_date, books.title , books.releaseYear FROM cart JOIN books ON cart.book_id = books.id WHERE cart.user_id = :user_id");
+        $quary = $this->db->dbconn->prepare("SELECT cart.id, cart.user_id, cart.book_id, cart.amount, cart.return_date, books.title , books.releaseYear, books.available FROM cart JOIN books ON cart.book_id = books.id WHERE cart.user_id = :user_id");
         $quary->execute([':user_id'=> $user_id]);
         return $quary->fetchAll();
     }

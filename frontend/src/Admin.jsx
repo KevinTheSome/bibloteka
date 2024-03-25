@@ -69,6 +69,20 @@ function Admin() {
       console.error(error)
     }
   }
+
+  async function addAdmin() {
+    try {
+      axios.post("http://localhost:8888/admin/addadmin", {
+        author: newauthor,
+      })
+      .then(function (response) {
+        console.log(response.data)
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
     try {
       axios.get("http://localhost:8888/admin")
@@ -114,6 +128,14 @@ function Admin() {
               <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Title" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
             </label>
             <input type="button" value="Add Author" onClick={addAuthor}/>
+          </form>
+
+          <form className='grid border-4 border-black-800'>
+            <label>
+              Author:
+              <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Title" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
+            </label>
+            <input type="button" value="Add Admin" onClick={addAdmin}/>
           </form>
 
         </div>

@@ -42,7 +42,7 @@ function Register() {
               Password:
               <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-              <input type="button" value="Register" onClick={createAccount} />
+              <input type="button" value="Register" onClick={createAccount} className='cursor-pointer bg-blue-700 text-white'/>
           </form>
         </div>
         <Footer />

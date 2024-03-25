@@ -33,12 +33,12 @@ function Book(props) {
   function rentBook(){
     if(getCookie("PHPSESSID") != "" && props.book.available > 0){
       try {
-        axios.post("http://localhost:8888/", {
+        axios.post("http://localhost:8888/books/rent", {
           user_id: props.user.id,
           book_id: props.book.id,
           amount: 1,
           return_date: gettoday(),
-          available: bookAvelabel-1,
+          available: bookAvelabel,
           book_id: props.book.id
         })
         .then(function (response) {
@@ -64,7 +64,7 @@ function Book(props) {
             <p>Author: {props.book.author}</p>
             <p>Releasd: {props.book.releaseYear}</p>
             <p>Available:{bookAvelabel}</p>
-            <button onClick={rentBook} className='bg-slate-500 text-white'>Rent</button>
+            <button onClick={rentBook} className='bg-blue-500 text-white'>Rent</button>
         </div>
     </> 
   )

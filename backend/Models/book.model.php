@@ -27,7 +27,9 @@ class bookModel{
 
     public function updateAvailableBook(int $available , int $id){
         $quary = $this->db->dbconn->prepare("UPDATE books SET available = :available WHERE id = :id");
-        $quary->execute([':return_date' => $available,':id' => $id]);
+        $quary->execute([':available' => $available,':id' => $id]);
         return $quary->fetchAll();
     }
+
+    
 }

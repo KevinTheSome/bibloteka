@@ -12,6 +12,19 @@ class adminModel{
         $this->db = new DbConnect($config);
     }
 
+    public function addAdmin(string $username){
+        $quary = $this->db->dbconn->prepare("UPDATE users SET isadmin = 1 WHERE username = :username");
+        $quary->execute([':username' => $username]);
+        return $quary->fetchAll();
+    }
+
+    public function removeAdmin(string $username)
+    {
+        $quary = $this->db->dbconn->prepare("UPDATE users SET isadmin = 0 WHERE username = :username");
+        $quary->execute([':username' => $username]);
+        return $quary->fetchAll();
+    }
+
     public function addAuthor(string $author)
     {
         $quary = $this->db->dbconn->prepare("INSERT INTO author(author) VALUES(:author)");

@@ -54,6 +54,7 @@ function Cart() {
       <div className="App">
         <Navbar />
         <div className='grid'>
+        {cart.length == 0 ? <h1 className='text-center text-3xl'>Cart is empty</h1> : null}
         {CartJSX}
         </div>
         <Footer />

@@ -16,6 +16,9 @@ switch ($route) {
     case '/books':
         require "./Controllers/book.controllers.php";
         break;
+    case '/books/rent':
+        require "./Controllers/book.controllers.php";
+        break;
     case '/register':
         require "./Controllers/register.controllers.php";
         break;
@@ -38,6 +41,9 @@ switch ($route) {
         require "./Controllers/admin.controllers.php";
         break;
     case '/admin/addauthor':
+        require "./Controllers/admin.controllers.php";
+        break;
+    case '/admin/addadmin':
         require "./Controllers/admin.controllers.php";
         break;
         

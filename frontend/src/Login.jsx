@@ -49,7 +49,7 @@ function Login() {
               Password:
               <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-              <input type="button" value="Login" onClick={check}/>
+              <input type="button" value="Login" onClick={check} className='cursor-pointer bg-blue-700 text-white'/>
           </form>
         </div>
         <Footer />

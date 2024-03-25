@@ -15,8 +15,18 @@ if (isset($_SESSION["user"])){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $cartModel = new cartModel($config);
-    $cartModel->nawCartEntry($data["user_id"],$data["book_id"],$data["amount"],$data["return_date"]);
-    $bookModel->updateAvailableBook($data["available"],$data["book_id"]);
+    if(parse_url($_SERVER['REQUEST_URI'])["path"] == "/books/rent") 
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        if(isset($data["available"]) && isset($data["book_id"]) && isset($data["book_id"]) && isset($data["user_id"]) && isset($data["amount"]) && isset($data["return_date"]))
+        {
+            $cartModel = new cartModel($config);
+            $cartModel->nawCartEntry($data["user_id"],$data["book_id"],$data["amount"],$data["return_date"]);
+            $bookModel->updateAvailableBook($data["available"] -1,$data["book_id"]); //gets the current value and subtracts 1
+            echo "OK";
+        }else{
+            echo "Error Not evrything is set";
+        }
+    }
+
 }

@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useState,useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 
 function OneCart(props) {
   const [newDate , setNewDate] = useState(props.cart.return_date)
+  const navigate = useNavigate();
 
   async function extendRent(){
     try {
@@ -11,7 +13,9 @@ function OneCart(props) {
         id: props.cart.id
       })
       .then(function (response) {
-        console.log(response.data)
+        if (response.status === 200) {
+          return navigate("/");
+        }
       })
     } catch (error) {
       console.error(error)
@@ -22,10 +26,14 @@ function OneCart(props) {
     console.log("id: "  + props.cart.id)
     try {
       axios.post("http://localhost:8888/cart/remove", {
-        id: props.cart.id
+        id: props.cart.id,
+        available: props.cart.available,
+        book_id: props.cart.book_id
       })
       .then(function (response) {
-        console.log(response.data)
+        if (response.status === 200) {
+          return navigate("/");
+        }
       })
     } catch (error) {
       console.error(error)
