@@ -14,7 +14,7 @@ function OneCart(props) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          return navigate("/");
+          window.location.reload(false);
         }
       })
     } catch (error) {

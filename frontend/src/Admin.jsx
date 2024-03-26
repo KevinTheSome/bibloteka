@@ -39,6 +39,12 @@ function Admin() {
     return "";
   }
 
+  useEffect(() => {
+    if(getCookie("PHPSESSID") == "") {
+      navigate("/")
+    }
+  },[])
+
   async function addBook() {
     try {
       axios.post("http://localhost:8888/admin/addbook", {
@@ -128,25 +134,27 @@ function Admin() {
   }
 
   useEffect(() => {
-    try {
-      axios.get("http://localhost:8888/admin")
-      .then(function (response){
-        setAuthors(response.data.authors)
-        setBooks(response.data.books)
-        setUser(response.data.user)
-        navigate("/admin")
-      })
-    } catch (error) {
-      console.error(error)
+
+    async function getData(){
+      try {
+        await axios.get("http://localhost:8888/admin")
+        .then(function (response){
+          setUser(response.data.user)
+          setAuthors(response.data.authors)
+          setBooks(response.data.books)
+        })
+      } catch (error) {
+        console.error(error)
+      }
     }
 
-    if(getCookie("PHPSESSID") == "" || user.isadmin === 0) {
-      navigate("/")
-    }
-    
+    getData()
+
   },[])
 
-
+  if(user.isadmin == 0) {
+    navigate("/")
+  }
 
   return (
     <>

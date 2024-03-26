@@ -5,23 +5,44 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 function Register() {
+  const [error , setError] = useState("")
   const [username , setUsername] = useState("")
   const [password , setPassword] = useState("")
   const navigate = useNavigate();
 
+  async function check(){
+    if (username == "" || password == ""){
+      setError("Emtpy filds not allowed!")
+    }else{
+      if(username == "")
+      {
+        setError("Emtpy username not allowed!")
+      }
+      else if (password == "")
+      {
+        setError("Emtpy password not allowed!")
+      } else {
+        await createAccount()
+      }
+    }
+  }
+
   async function createAccount(){
+
     try {
-      axios.post("http://localhost:8888/register", {
+      await axios.post("http://localhost:8888/register", {
         username: username, password: password,
       })
       .then(function (response) {
-        if (response.status === 200) {
-          return navigate("/login");
-        }
-        return null;
+        setError("")
+        setError(response.data.error)
       })
     } catch (error) {
       console.error(error)
+    }
+
+    if (error.length == 0) {
+      return navigate("/login");
     }
 
   }
@@ -35,14 +56,15 @@ function Register() {
           <form className='grid border-4 border-black-800 '>
             <label>
               Username:
-              <input required type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input required type="text" name="username" minLength="3" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
             <label>
               Password:
-              <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input required type="password" minLength="3" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-              <input type="button" value="Register" onClick={createAccount} className='cursor-pointer bg-blue-700 text-white'/>
+              <input type="button" value="Register" onClick={check} className='cursor-pointer bg-blue-700 text-white'/>
           </form>
+          <p className='text-red-500'>{error}</p>
         </div>
         <Footer />
       </div>

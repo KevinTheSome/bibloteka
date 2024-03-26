@@ -19,6 +19,17 @@ class userModel{
         return $quary->fetchAll();
     }
 
+    public function checkIfUserExists(string $username)
+    {
+        $quary = $this->db->dbconn->prepare("SELECT * FROM users WHERE username = :username");
+        $quary->execute([':username' => $username]);
+        if($quary->fetchAll() != []){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function addUser(string $username,string $userpassword,int $isadmin){
         $quary = $this->db->dbconn->prepare("INSERT INTO users(username,userpassword,isadmin) VALUES(:username,:userpassword,:isadmin)");
         $quary->execute([':username' => $username , ':userpassword' => password_hash($userpassword,PASSWORD_DEFAULT) , ':isadmin' => $isadmin]);

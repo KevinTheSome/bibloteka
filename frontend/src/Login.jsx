@@ -6,16 +6,18 @@ import Footer from './components/Footer'
 
 function Login() {
   const [username , setUsername] = useState("")
+  const [error , setError] = useState("")
   const [password , setPassword] = useState("")
   const navigate = useNavigate();
 
   async function check(){
-    if (username == "" && password == ""){
-      console.log("Emtpy filds not allowed") //todo
+    if (username == "" || password == ""){
+      setError("Emtpy filds not allowed!")
     }else{
       await loginAccount()
     }
   }
+
   async function loginAccount(){
     try {
       axios.post("http://localhost:8888/login", {
@@ -24,9 +26,13 @@ function Login() {
         withCredentials: true,
       })
       .then(function (response) {
-        console.log(response)
         console.log(response.data)
-        navigate("/")
+        setError(response.data.error)
+
+        if (response.data.error == "" || response.data.error == null) {
+          navigate("/")
+        }
+        
       })
     } catch (error) { 
       console.error(error)
@@ -51,6 +57,7 @@ function Login() {
             </label>
               <input type="button" value="Login" onClick={check} className='cursor-pointer bg-blue-700 text-white'/>
           </form>
+          <p className='text-red-500'>{error}</p>
         </div>
         <Footer />
       </div>

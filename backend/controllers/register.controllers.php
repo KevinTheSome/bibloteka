@@ -24,8 +24,23 @@ require_once "./util.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $data = json_decode(file_get_contents("php://input"), true);
-    $userModel = new userModel($config);
-    $userModel->addUser($data["username"], $data["password"], 0);
+
+    if(isset($data["username"]) and isset($data["password"]))
+    {
+        $userModel = new userModel($config);
+
+        if($userModel->checkIfUserExists($data["username"]))
+        {
+            echo json_encode(["error" => "User already exists"]);
+
+        }else{
+            $userModel->addUser($data["username"], $data["password"], 0);
+        }
+        
+    }else{
+        echo json_encode(["error" => "Not all fields are set"]);
+    }
+
 }else{
     http_response_code(404);
 }
