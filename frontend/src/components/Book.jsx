@@ -22,7 +22,7 @@ function Book(props) {
     return "";
   }
 
-  function gettoday(){
+  function getNextWeek(){
     const date = new Date()
     date.setDate(new Date().getDate() + 7)
 
@@ -39,7 +39,7 @@ function Book(props) {
           user_id: props.user.id,
           book_id: props.book.id,
           amount: 1,
-          return_date: gettoday(),
+          return_date: getNextWeek(),
           available: bookAvelabel,
           book_id: props.book.id
         })
