@@ -23,7 +23,9 @@ function Book(props) {
   }
 
   function gettoday(){
-    const date = new Date();
+    const date = new Date()
+    date.setDate(new Date().getDate() + 7)
+
     const year = date.getFullYear();
     const month = `0${date.getMonth() + 1}`.slice(-2);
     const day = `0${date.getDate()}`.slice(-2);
@@ -59,7 +61,7 @@ function Book(props) {
 
   return (
     <> 
-        <div className='grid border-gray-800 border-4 m-4 w-4/12 '>
+        <div className='grid border-gray-800 border-4 m-4 w-4/12 max-h-40'>
             <p>Title: {props.book.title}</p>
             <p>Author: {props.book.author}</p>
             <p>Releasd: {props.book.releaseYear}</p>

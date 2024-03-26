@@ -51,7 +51,7 @@ function Register() {
     <>
       <div className="App">
         <Navbar />
-        <div className='grid justify-center content-center'>
+        <div className='grid h-screen justify-center content-center'>
           <h1 className='text-3xl font-bold'>Register</h1>
           <form className='grid border-4 border-black-800 '>
             <label>

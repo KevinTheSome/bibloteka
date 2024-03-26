@@ -32,7 +32,7 @@ function App() {
     <>
       <div className="App">
         <Navbar />
-        <div className='grid '>
+        <div className='grid h-screen'>
           {booksJSX}
         </div>
         <Footer />

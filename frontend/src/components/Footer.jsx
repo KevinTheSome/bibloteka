@@ -4,7 +4,7 @@ function Footer() {
 
   return (
     <> 
-        <footer className="bg-gray-800 text-white p-4 text-center">
+        <footer className="bg-gray-800 text-white p-4 text-center ticky bottom-0 z-50">
             <p> Made by a guy called Kevin</p>
         </footer>
     </>

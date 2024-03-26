@@ -160,7 +160,7 @@ function Admin() {
     <>
       <div className="App">
         <Navbar />
-        <div className='grid '>
+        <div className='grid h-screen'>
 
           <form className='grid border-4 border-black-800'>
             <label>

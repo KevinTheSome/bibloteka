@@ -42,7 +42,7 @@ function OneCart(props) {
 
   return (
     <> 
-        <div className='grid border-gray-800 border-4 m-4 w-4/12 '>
+        <div className='grid border-gray-800 border-4 m-4 w-4/12 max-h-40'>
             <p>Title: {props.cart.title}</p>
             <p>Released Year: {props.cart.releaseYear}</p>
             <p>Return date: {props.cart.return_date}</p>

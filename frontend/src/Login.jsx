@@ -26,7 +26,6 @@ function Login() {
         withCredentials: true,
       })
       .then(function (response) {
-        console.log(response.data)
         setError(response.data.error)
 
         if (response.data.error == "" || response.data.error == null) {
@@ -44,7 +43,7 @@ function Login() {
     <>
       <div className="App">
         <Navbar />
-        <div className='grid justify-center content-center'>
+        <div className='grid h-screen justify-center content-center'>
           <h1 className='text-3xl font-bold'>Login</h1>
           <form className='grid border-4 border-black-800 '>
             <label>
