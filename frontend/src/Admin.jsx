@@ -53,7 +53,7 @@ function Admin() {
       })
       .then(function (response) {
         console.log(response.data)
-        navigate("/admin")
+        navigate("/")
       })
     } catch (error) {
       console.error(error)
@@ -68,7 +68,7 @@ function Admin() {
       })
       .then(function (response) {
         console.log(response.data)
-        navigate("/admin")
+        navigate("/")
       })
     } catch (error) {
       console.error(error)

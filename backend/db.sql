@@ -38,4 +38,6 @@ CREATE TABLE cart(
 
 
 INSERT INTO author(author) VALUES('Me');
+INSERT INTO author(author) VALUES('Sun Tzu');
 INSERT INTO books(title,author_id,releaseYear,available) VALUES('My myself and I', 1 , 2024, 1);
+INSERT INTO books(title,author_id,releaseYear,available) VALUES('Art of war', 2 , 1231, 2);
