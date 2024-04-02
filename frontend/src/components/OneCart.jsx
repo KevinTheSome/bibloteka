@@ -47,8 +47,8 @@ function OneCart(props) {
             <p>Released Year: {props.cart.releaseYear}</p>
             <p>Return date: {props.cart.return_date}</p>
             <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} />
-            <input type="button" value="Extend rent" onClick={extendRent} className='cursor-pointer bg-blue-500 text-white' />
-            <input type="button" value="Return" onClick={returnBook} className='cursor-pointer bg-blue-700 text-white' />
+            <input type="button" value="Extend rent" onClick={extendRent} className='cursor-pointer bg-indigo-600 hover:bg-indigo-400 text-white' />
+            <input type="button" value="Return" onClick={returnBook} className='cursor-pointer bg-indigo-700 hover:bg-indigo-500 text-white' />
         </div>
     </>
   )

@@ -66,7 +66,7 @@ function Book(props) {
             <h2 className='text-1xl'>{props.book.author}</h2>
             <p>First published: {props.book.releaseYear}</p>
             <p>Available:{bookAvelabel}</p>
-            <button onClick={rentBook} className='bg-blue-500 text-white'>Rent</button>
+            <button onClick={rentBook} className='bg-indigo-700 hover:bg-indigo-500 text-white'>Rent</button>
         </div>
     </> 
   )
