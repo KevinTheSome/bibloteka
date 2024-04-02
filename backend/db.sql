@@ -20,6 +20,7 @@ CREATE TABLE users(
 	id int NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     userpassword VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
     isadmin TINYINT(1),
 	PRIMARY KEY(id)
 );
@@ -38,6 +39,3 @@ CREATE TABLE cart(
 
 INSERT INTO author(author) VALUES('Me');
 INSERT INTO books(title,author_id,releaseYear,available) VALUES('My myself and I', 1 , 2024, 1);
-INSERT INTO users(username,userpassword,isadmin) VALUES('Kevin','Kevin',1);
-INSERT INTO cart(user_id,book_id,amount,return_date) VALUES(1,1,1,'2024-01-01');
-

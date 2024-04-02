@@ -39,11 +39,9 @@ function Admin() {
     return "";
   }
 
-  useEffect(() => {
     if(getCookie("PHPSESSID") == "") {
       navigate("/")
     }
-  },[])
 
   async function addBook() {
     try {
@@ -152,7 +150,11 @@ function Admin() {
 
   },[])
 
-  if(user.isadmin == 0) {
+  if(user == null) {
+    navigate("/login")
+  }
+
+  if(user.isadmin == 0){
     navigate("/")
   }
 

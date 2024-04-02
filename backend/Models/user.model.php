@@ -30,9 +30,9 @@ class userModel{
         }
     }
 
-    public function addUser(string $username,string $userpassword,int $isadmin){
-        $quary = $this->db->dbconn->prepare("INSERT INTO users(username,userpassword,isadmin) VALUES(:username,:userpassword,:isadmin)");
-        $quary->execute([':username' => $username , ':userpassword' => password_hash($userpassword,PASSWORD_DEFAULT) , ':isadmin' => $isadmin]);
+    public function addUser(string $username,string $userpassword,string $email,int $isadmin){
+        $quary = $this->db->dbconn->prepare("INSERT INTO users(username,userpassword,email,isadmin) VALUES(:username,:userpassword,:email,:isadmin)");
+        $quary->execute([':username' => $username , ':userpassword' => password_hash($userpassword,PASSWORD_DEFAULT), ':email' => $email , ':isadmin' => $isadmin]);
         return $quary->fetchAll();
     }
 

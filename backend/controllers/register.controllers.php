@@ -24,21 +24,29 @@ require_once "./util.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $data = json_decode(file_get_contents("php://input"), true);
-
-    if(isset($data["username"]) and isset($data["password"]))
+    $userModel = new userModel($config);
+    $errors = [];
+    
+    if(!isset($data["username"]) and !isset($data["password"]) and !isset($data["email"]))
     {
-        $userModel = new userModel($config);
-
-        if($userModel->checkIfUserExists($data["username"]))
-        {
-            echo json_encode(["error" => "User already exists"]);
-
-        }else{
-            $userModel->addUser($data["username"], $data["password"], 0);
-        }
-        
-    }else{
+        $errors[] = "Not all fields are set";
         echo json_encode(["error" => "Not all fields are set"]);
+    }
+
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)) 
+    {
+        $errors[] = "Email is not valid";
+        echo json_encode(["error" => "Email is not valid"]);
+    }
+
+    if($userModel->checkIfUserExists($data["username"]))
+    {
+        $errors[] = "User already exists";
+        echo json_encode(["error" => "User already exists"]);
+    }
+    
+    if($errors == []){
+        $userModel->addUser($data["username"], $data["password"], $data["email"], 0);
     }
 
 }else{

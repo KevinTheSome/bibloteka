@@ -27,10 +27,6 @@ function Cart() {
     return "";
   }
 
-  if(getCookie("PHPSESSID") == ""){
-    navigate("/login")
-  }
-
   useEffect(() => {
     try {
       axios.get("http://localhost:8888/cart")
@@ -44,6 +40,13 @@ function Cart() {
     }
   },[])
 
+  if(getCookie("PHPSESSID") == ""){
+    navigate("/login")
+  }
+
+  if(user == null) {
+    navigate("/login")
+  }
 
   const CartJSX = cart.map((value, key) => {
     return <OneCart key={key} cart={value} user={user}/>;
