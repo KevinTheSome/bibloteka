@@ -183,7 +183,7 @@ function Admin() {
               Available:
               <input type="number" className="w-1/12 border-2 border-gray-700" placeholder="Available" value={available} onChange={(e) => setAvailable(e.target.value)}/>
             </label>
-            <input type="button" value="Add Book" onClick={addBook}/>
+            <input className='cursor-pointer' type="button" value="Add Book" onClick={addBook}/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -193,7 +193,7 @@ function Admin() {
                   {books.map((book) => <option key={book.id + .1} value={book.id} >{book.title}</option>)}
                </select>
               </label>
-            <input type="button" value="Remove Book" onClick={removeBook}/>
+            <input type="button" value="Remove Book" onClick={removeBook} className='cursor-pointer'/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -201,7 +201,7 @@ function Admin() {
               Author:
               <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Author" value={newauthor} onChange={(e) => setnewAuthor(e.target.value)}/>
             </label>
-            <input type="button" value="Add Author" onClick={addAuthor}/>
+            <input type="button" value="Add Author" onClick={addAuthor} className='cursor-pointer'/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -211,7 +211,7 @@ function Admin() {
                   {authors.map((author) => <option key={author.id} value={author.id} >{author.author}</option>)}
                 </select>
               </label>
-            <input type="button" value="Remove Author" onClick={removeAuthor}/>
+            <input type="button" value="Remove Author" onClick={removeAuthor} className='cursor-pointer'/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -219,7 +219,7 @@ function Admin() {
               Username:
               <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Username" value={addAdminUsername} onChange={(e) => setAddAdminUsername(e.target.value)}/>
             </label>
-            <input type="button" value="Add Admin" onClick={addAdmin}/>
+            <input type="button" value="Add Admin" onClick={addAdmin} className='cursor-pointer'/>
           </form>
 
           <form className='grid border-4 border-black-800'>
@@ -227,7 +227,7 @@ function Admin() {
               Username:
               <input type="text" className="w-1/12 border-2 border-gray-700" placeholder="Username" value={removeAdminUsername} onChange={(e) => setRemoveAdminUsername(e.target.value)}/>
             </label>
-            <input type="button" value="Remove Admin" onClick={removeAdmin}/>
+            <input type="button" value="Remove Admin" onClick={removeAdmin} className='cursor-pointer'/>
           </form>
 
         </div>
